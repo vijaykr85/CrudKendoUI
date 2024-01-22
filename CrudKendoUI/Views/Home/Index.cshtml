@@ -1,0 +1,73 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendo UI GridView Example</title>
+    @*   <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.301/styles/kendo.common.min.css"> *@
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2022.1.301/js/kendo.all.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+    <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/List/GetData",
+                        dataType: "json"
+                    },
+                    // create: {
+                    //     url: "/List/GetData",
+                    //     dataType: "json",
+                    //     type: "POST"
+                    // },
+                    // update: {
+                    //     url: "/List/UpdateData",
+                    //     dataType: "json",
+                    //     type: "POST"
+                    // },
+                    // destroy: {
+                    //     url: "/List/DeleteData",
+                    //     dataType: "json",
+                    //     type: "POST"
+                    // }
+                },
+                schema: {
+                    model: {
+                        id:"id",
+                        fields: {
+                            id: { type: "number" },
+                            name: { type: "string", editable: true },
+                            brand: { type: "string" },
+                            quantity: {type: " number"}
+                        }
+                    }
+                }
+            },
+            columns: [
+                { field: "id", title: "id" },
+                { field: "name", title: "name" },
+                { field: "brand", title: "brand" },
+                { field: "quantity", title: "quantity" },
+                { command: ["edit", "destroy"], title: "&nbsp", width: "250px" }
+            ],
+            height: 550,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+        });
+    </script>
+
+</body>
+</html>
